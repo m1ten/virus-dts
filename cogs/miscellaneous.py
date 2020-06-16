@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import json
 
 class Miscellaneous(commands.Cog,):
     
@@ -31,9 +30,6 @@ class Miscellaneous(commands.Cog,):
         author = ctx.author
         print(str(author) + ': ' + str(msg))
         await ctx.send(f'Printed ``{msg}`` to console')
-        while True:
-            print(str(author) + ': ' + str(msg))
-            await ctx.send(f'Printed ``{msg}`` to console')
 
 def setup(bot):
     bot.add_cog(Miscellaneous(bot))
