@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import json
 
-class Prefix(commands.Cog,):
+
+class Prefix(commands.Cog, ):
 
     def __init__(self, bot):
         self.bot = bot
@@ -19,7 +20,6 @@ class Prefix(commands.Cog,):
         json.dump(data, wf, indent=4)
         wf.close()
 
-
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
         rf = open('././data.json', 'r')
@@ -31,7 +31,6 @@ class Prefix(commands.Cog,):
         json.dump(data, wf, indent=4)
         wf.close()
 
-
     @commands.command()
     async def prefix(self, ctx, new_prefix):
         rf = open('././data.json', 'r')
@@ -41,7 +40,7 @@ class Prefix(commands.Cog,):
         wf = open('././data.json', 'w')
         data['prefix'][str(ctx.guild.id)] = new_prefix
         json.dump(data, wf, indent=4)
-    
+
         await ctx.send(f'Prefix changed to ``{new_prefix}``')
 
 

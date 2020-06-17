@@ -1,13 +1,9 @@
 import discord
 import os
 import json
-from discord.ext import commands
+from discord.ext import commands, tasks
 
-data = {}
-data['token'] = None
-data['prefix'] = None
-data['owner_id'] = None
-
+data = {'token': None, 'prefix': {}, 'owner_id': None}
 
 try:
     rf = open('data.json', 'r')
@@ -17,7 +13,7 @@ except:
     pass
 
 
-if data['token'] == None:
+if data['token'] is None:
     wf = open('./data.json', 'w')
     data['token'] = input('Enter token: ')
     json.dump(data, wf, indent=4)
@@ -36,9 +32,9 @@ async def get_prefix(bot, ctx):
 bot = commands.Bot(command_prefix=get_prefix)
 
 
-if data['owner_id'] == None:
+if data['owner_id'] is None:
     wf = open('./data.json', 'w')
-    data['owner_id'] = input('Enter owner_id: ')
+    data['owner_id'] = int(input('Enter owner_id: '))
     bot.owner_id = data['owner_id']
     json.dump(data, wf, indent=4)
     wf.close()
@@ -48,9 +44,17 @@ else:
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(status=discord.Status.idle,
+                              activity=discord.Game('!help | m1t3n.tk'))
+
+    rf = open('./data.json', 'r')
+    data = json.load(rf)
+    bot.owner_id = data['owner_id']
+    owner = bot.get_user(bot.owner_id)
+
+    await owner.send('Shark is online.')
     print('Shark is online.')
     return
-
 
 if __name__ == '__main__':
     for file in os.listdir('cogs'):

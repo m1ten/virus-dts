@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import json
 
-class Help(commands.Cog,):
+
+class Help(commands.Cog, ):
 
     def __init__(self, bot):
         self.bot = bot
@@ -18,7 +19,6 @@ class Help(commands.Cog,):
         embed.add_field(name='ping', value='Pong!', inline=False)
 
         await author.send(embed=embed)
-        
 
 
 def setup(bot):

@@ -1,14 +1,15 @@
 import discord
 from discord.ext import commands
 
-class Cogs(commands.Cog,):
+
+class Cogs(commands.Cog, ):
 
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def load(self, ctx, extension='miscellaneous'):
-        try: 
+        try:
             self.bot.load_extension(f'cogs.{extension}')
             await ctx.send(f'Successfully loaded ``{extension}``!')
         except:
@@ -16,7 +17,7 @@ class Cogs(commands.Cog,):
 
     @commands.command()
     async def unload(self, ctx, extension='miscellaneous'):
-        try: 
+        try:
             self.bot.unload_extension(f'cogs.{extension}')
             await ctx.send(f'Successfully unloaded ``{extension}``!')
         except:
@@ -24,11 +25,12 @@ class Cogs(commands.Cog,):
 
     @commands.command()
     async def reload(self, ctx, extension='miscellaneous'):
-        try: 
+        try:
             self.bot.reload_extension(f'cogs.{extension}')
             await ctx.send(f'Successfully reloaded ``{extension}``!')
         except:
             await ctx.send(f'Error reloading ``{extension}``!')
+
 
 def setup(bot):
     bot.add_cog(Cogs(bot))
