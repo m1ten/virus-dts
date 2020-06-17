@@ -3,48 +3,51 @@ import os
 import json
 from discord.ext import commands
 
-def get_token():
+data = {}
+data['token'] = None
+data['prefix'] = None
+data['owner_id'] = None
+
+
+try:
+    rf = open('data.json', 'r')
+    data = json.load(rf)
+    rf.close()
+except:
+    pass
+
+
+if data['token'] == None:
+    wf = open('./data.json', 'w')
+    data['token'] = input('Enter token: ')
+    json.dump(data, wf, indent=4)
+    wf.close()
+else:
+    pass
+
+
+async def get_prefix(bot, ctx):
     try:
-        with open('./data/token.json', 'r') as f:
-            token = json.load(f)
-    except ValueError:
-        with open('./data/token.json', 'w') as f:
-            token = input('Enter Token: ')
-            json.dump(token, f, indent=4)
-
-    return token
-
-
-def get_prefix(bot, ctx):
-    try:
-        with open('./data/prefix.json', 'r') as f:
-            prefixes = json.load(f)
-        return prefixes[str(ctx.guild.id)]
+        return data['prefix'][str(ctx.guild.id)]
     except:
         return '!'
 
 
-bot = commands.Bot(command_prefix = get_prefix)
+bot = commands.Bot(command_prefix=get_prefix)
 
-try: 
-    with open('./data/owner_id.json', 'r') as f:
-        owner_id = json.load(f)
-        bot.owner_id = owner_id
-except: bot.owner_id = None
 
-if bot.owner_id == None:
-    with open('./data/owner_id.json', 'w') as f:
-        owner_id = int(input('Enter owner_id: '))
-        json.dump(owner_id, f, indent=4)
-        bot.owner_id = owner_id
+if data['owner_id'] == None:
+    wf = open('./data.json', 'w')
+    data['owner_id'] = input('Enter owner_id: ')
+    bot.owner_id = data['owner_id']
+    json.dump(data, wf, indent=4)
+    wf.close()
+else:
+    pass
+
 
 @bot.event
 async def on_ready():
-    try:
-        owner = bot.get_user(bot.owner_id)
-        await owner.send('Shark is online.')
-    except:
-        pass
     print('Shark is online.')
     return
 
@@ -53,6 +56,6 @@ if __name__ == '__main__':
     for file in os.listdir('cogs'):
         if file.endswith('.py') and not file.startswith('_'):
             bot.load_extension(f'cogs.{file[:-3]}')
-    
 
-bot.run(get_token())
+
+bot.run(data['token'])

@@ -9,35 +9,38 @@ class Prefix(commands.Cog,):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        with open('././data/prefix.json', 'r') as f:
-            prefixes = json.load(f)
+        rf = open('././data.json', 'r')
+        data = json.load(rf)
+        rf.close()
 
-        prefixes[str(guild.id)] = '!'
-
-        with open('././data/prefix.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
+        wf = open('././data.json', 'w')
+        data['prefix'][str(guild.id)] = '!'
+        print(data)
+        json.dump(data, wf, indent=4)
+        wf.close()
 
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
-        with open('././data/prefix.json', 'r') as f:
-            prefixes = json.load(f)
+        rf = open('././data.json', 'r')
+        data = json.load(rf)
+        rf.close()
 
-        prefixes.pop(str(guild.id))
-
-        with open('././data/prefix.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
+        wf = open('././data.json', 'w')
+        data['prefix'].pop(str(guild.id))
+        json.dump(data, wf, indent=4)
+        wf.close()
 
 
     @commands.command()
     async def prefix(self, ctx, new_prefix):
-        with open('././data/prefix.json', 'r') as f:
-            prefixes = json.load(f)
+        rf = open('././data.json', 'r')
+        data = json.load(rf)
+        rf.close()
 
-        prefixes[str(ctx.guild.id)] = new_prefix
-
-        with open('././data/prefix.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
+        wf = open('././data.json', 'w')
+        data['prefix'][str(ctx.guild.id)] = new_prefix
+        json.dump(data, wf, indent=4)
     
         await ctx.send(f'Prefix changed to ``{new_prefix}``')
 
