@@ -1,7 +1,7 @@
 import discord
 import os
 import json
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 data = {'token': None, 'prefix': {}, 'owner_id': None}
 
