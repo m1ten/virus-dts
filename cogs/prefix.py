@@ -32,6 +32,7 @@ class Prefix(commands.Cog, ):
         wf.close()
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def prefix(self, ctx, new_prefix):
         rf = open('././data.json', 'r')
         data = json.load(rf)

@@ -33,15 +33,6 @@ class Miscellaneous(commands.Cog, ):
         print(str(author) + ': ' + str(msg))
         await ctx.send(f'Printed ``{msg}`` to console')
 
-    @commands.command()
-    async def say(self, ctx, *args, ):
-        try:
-            await ctx.message.delete()
-        except:
-            pass
-        msg = ' '.join(args)
-        await ctx.send(msg)
-
 
 def setup(bot):
     bot.add_cog(Miscellaneous(bot))
