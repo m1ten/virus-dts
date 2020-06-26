@@ -21,17 +21,6 @@ if data['token'] is None:
 else:
     pass
 
-
-async def get_prefix(bot, ctx):
-    try:
-        return data['prefix'][str(ctx.guild.id)]
-    except:
-        return '!'
-
-
-bot = commands.Bot(command_prefix=get_prefix)
-
-
 if data['owner_id'] is None:
     wf = open('./data.json', 'w')
     data['owner_id'] = int(input('Enter owner_id: '))
@@ -40,6 +29,20 @@ if data['owner_id'] is None:
     wf.close()
 else:
     pass
+
+
+async def get_prefix(bot, ctx):
+    prefix_file = open('data.json', 'r')
+    data = json.load(prefix_file)
+    prefix_file.close
+    
+    try:
+        return data['prefix'][str(ctx.guild.id)]
+    except:
+        return '!'
+
+
+bot = commands.Bot(command_prefix=get_prefix)
 
 
 @bot.event
@@ -51,8 +54,10 @@ async def on_ready():
     data = json.load(rf)
     bot.owner_id = data['owner_id']
     owner = bot.get_user(bot.owner_id)
-
-    await owner.send('Shark is online.')
+    try:
+        await owner.send('Shark is online.')
+    except: 
+        pass
     print('Shark is online.')
     return
 

@@ -33,10 +33,13 @@ class Prefix(commands.Cog, ):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def prefix(self, ctx, new_prefix):
+    async def prefix(self, ctx, new_prefix=None):
         rf = open('././data.json', 'r')
         data = json.load(rf)
         rf.close()
+
+        if new_prefix is None:
+           return await ctx.send(f"Current prefix for this guild is ``{data['prefix'][str(ctx.guild.id)]}``.")
 
         wf = open('././data.json', 'w')
         data['prefix'][str(ctx.guild.id)] = new_prefix
