@@ -40,9 +40,26 @@ class Moderation(commands.Cog, ):
     @commands.bot_has_permissions(kick_members=True)
     async def kick(self, ctx, member : discord.Member, *, reason=None):
         await ctx.message.delete()
-        await member.send(f':x: | You have been kicked from ``{ctx.guild}`` with the reason, ``{reason}``.')
-        await member.kick(reason=reason)
+        try:
+            await member.send(f':x: | You have been kicked from ``{ctx.guild}`` with the reason, ``{reason}``.')
+            await member.kick(reason=reason)
+        except discord.Forbidden:
+            await member.kick(reason=reason)
         await ctx.send(f':white_check_mark: | Successfully kicked ``{member}`` with the reason, ``{reason}``.', delete_after=5)
+
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
+    async def ban(self, ctx, member : discord.Member, *, reason=None):
+        await ctx.message.delete()
+        try:
+            await member.send(f':x: | You have been banned from ``{ctx.guild}`` with the reason, ``{reason}``.')
+            await member.ban(reason=reason)
+        except discord.Forbidden:
+            await member.ban(reason=reason)
+        await ctx.send(f':white_check_mark: | Successfully banned ``{member}`` with the reason, ``{reason}``.', delete_after=5)
 
     # errors
 
@@ -64,6 +81,17 @@ class Moderation(commands.Cog, ):
             await ctx.send(':x: | You are missing ``kick_members`` permission.', delete_after=5)
         if isinstance(error, commands.BotMissingPermissions):
             await ctx.send(':x: | I am missing ``kick_members`` permission.', delete_after=5)
+
+
+    @ban.error
+    async def ban_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.CommandInvokeError):
+            if isinstance(error.original, discord.Forbidden):
+                await ctx.send(':x: | Unable to ban member.', delete_after=5)
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.send(':x: | You are missing ``ban_members`` permission.', delete_after=5)
+        if isinstance(error, commands.BotMissingPermissions):
+            await ctx.send(':x: | I am missing ``ban_members`` permission.', delete_after=5)
 
 
 def setup(bot):
