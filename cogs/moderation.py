@@ -45,7 +45,7 @@ class Moderation(commands.Cog, ):
             await member.kick(reason=reason)
         except discord.Forbidden:
             await member.kick(reason=reason)
-        await ctx.send(f':white_check_mark: | Successfully kicked ``{member}`` with the reason, ``{reason}``.', delete_after=5)
+        await ctx.send(f':white_check_mark: | Successfully kicked {member.mention} with the reason, ``{reason}``.', delete_after=5)
 
 
     @commands.command()
@@ -59,8 +59,25 @@ class Moderation(commands.Cog, ):
             await member.ban(reason=reason)
         except discord.Forbidden:
             await member.ban(reason=reason)
-        await ctx.send(f':white_check_mark: | Successfully banned ``{member}`` with the reason, ``{reason}``.', delete_after=5)
+        await ctx.send(f':white_check_mark: | Successfully banned {member.mention} with the reason, ``{reason}``.', delete_after=5)
 
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
+    async def unban(self, ctx, *, member):
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
+        
+        for ban_entry in banned_users:
+            user = ban_entry.user
+
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unban(user)
+                await ctx.send(f':white_check_mark: | Successfully unbanned {user.mention}.', delete_after=5)
+                return
+    
     # errors
 
     @clear.error
