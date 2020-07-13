@@ -27,7 +27,7 @@ class Reload(commands.Cog, ):
     @commands.is_owner()
     async def reload(self, ctx, extension='miscellaneous'):
         try:
-            self.bot.reload_extension(f'cogs.{extension}')
+            self.bot.reload_extension(f'commands.{extension}')
             await ctx.send(f'Successfully reloaded ``{extension}``!')
         except:
             await ctx.send(f':x: | Error reloading ``{extension}``!')

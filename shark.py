@@ -48,7 +48,7 @@ bot = commands.Bot(command_prefix=get_prefix)
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.idle,
-                              activity=discord.Game('!help | m1t3n.tk'))
+                              activity=discord.Game('! | m1ten.me/shark'))
 
     rf = open('./data.json', 'r')
     data = json.load(rf)
@@ -62,9 +62,9 @@ async def on_ready():
     return
 
 if __name__ == '__main__':
-    for file in os.listdir('cogs'):
+    for file in os.listdir('commands'):
         if file.endswith('.py') and not file.startswith('_'):
-            bot.load_extension(f'cogs.{file[:-3]}')
+            bot.load_extension(f'commands.{file[:-3]}')
 
 
 bot.run(data['token'])

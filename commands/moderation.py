@@ -40,12 +40,16 @@ class Moderation(commands.Cog, ):
     @commands.bot_has_permissions(kick_members=True)
     async def kick(self, ctx, member : discord.Member, *, reason=None):
         await ctx.message.delete()
-        try:
-            await member.send(f':x: | You have been kicked from ``{ctx.guild}`` with the reason, ``{reason}``.')
-            await member.kick(reason=reason)
-        except discord.Forbidden:
-            await member.kick(reason=reason)
-        await ctx.send(f':white_check_mark: | Successfully kicked {member.mention} with the reason, ``{reason}``.', delete_after=5)
+        if ctx.author.top_role > member.top_role:
+            try:
+                await member.send(f':x: | You have been kicked from ``{ctx.guild}`` with the reason, ``{reason}``.')
+                await member.kick(reason=reason)
+            except discord.Forbidden:
+                await member.kick(reason=reason)
+
+            await ctx.send(f':white_check_mark: | Successfully kicked {member.mention} with the reason, ``{reason}``.', delete_after=5)
+        else:
+            await ctx.send(':x: | Unable to kick member.', delete_after=5)
 
 
     @commands.command()
@@ -54,12 +58,16 @@ class Moderation(commands.Cog, ):
     @commands.bot_has_permissions(ban_members=True)
     async def ban(self, ctx, member : discord.Member, *, reason=None):
         await ctx.message.delete()
-        try:
-            await member.send(f':x: | You have been banned from ``{ctx.guild}`` with the reason, ``{reason}``.')
-            await member.ban(reason=reason)
-        except discord.Forbidden:
-            await member.ban(reason=reason)
-        await ctx.send(f':white_check_mark: | Successfully banned {member.mention} with the reason, ``{reason}``.', delete_after=5)
+        if ctx.author.top_role > member.top_role:
+            try:
+                await member.send(f':x: | You have been banned from ``{ctx.guild}`` with the reason, ``{reason}``.')
+                await member.ban(reason=reason)
+            except discord.Forbidden:
+                await member.ban(reason=reason)
+
+                await ctx.send(f':white_check_mark: | Successfully banned {member.mention} with the reason, ``{reason}``.', delete_after=5)
+        else: 
+            await ctx.send(':x: | Unable to ban member.', delete_after=5)
 
 
     @commands.command()

@@ -8,16 +8,16 @@ class Miscellaneous(commands.Cog, ):
         self.bot = bot
 
     @commands.command()
-    async def calc(self, ctx, a, calc, b):
-        if calc == '+':
+    async def math(self, ctx, a, symbol, b):
+        if symbol == '+':
             await ctx.send(float(a) + float(b))
-        elif calc == '-':
+        elif symbol == '-':
             await ctx.send(float(a) - float(b))
-        elif calc == '**' or '^':
+        elif symbol == '**' or '^':
             await ctx.send(float(a) ** float(b))
-        elif calc == '*':
+        elif symbol == '*':
             await ctx.send(float(a) * float(b))
-        elif calc == '/':
+        elif symbol == '/':
             await ctx.send(float(a) / float(b))
         else:
             await ctx.send('error, undefined arg')
