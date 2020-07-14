@@ -24,7 +24,6 @@ else:
 if data['owner_id'] is None:
     wf = open('./data.json', 'w')
     data['owner_id'] = int(input('Enter owner_id: '))
-    bot.owner_id = data['owner_id']
     json.dump(data, wf, indent=4)
     wf.close()
 else:
