@@ -80,8 +80,8 @@ async def on_ready(client):
 if __name__ == '__main__':
     _bot_()
 
-    for cog_files in os.listdir('commands'):
-        if cog_files.endswith('.py') and not cog_files.startswith('_'):
-            bot.load_extension(f'commands.{cog_files[:-3]}')
+    for command_files in os.listdir('commands'):
+        if command_files.endswith('.py') and not command_files.startswith('_'):
+            client.load_extension(f'commands.{command_files[:-3]}')
 
 client.run(bot['token'])
