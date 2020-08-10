@@ -1,2 +1,1 @@
-# discord.py
-discord.py bot (open source), just practice rn
+### Discord.py -> Discord.js
