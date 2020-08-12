@@ -1,8 +1,24 @@
 const Discord = require("discord.js"),
-  bot = new Discord.Client();
+  client = new Discord.Client(),
+  fs = require("fs"),
+  readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
-bot.once("ready", () => {
-  console.log("Shark is online!");
+readline.question("Enter Name: ", name => {
+  console.log(name);
+  readline.close();
 });
 
-bot.login("NzIxNDQwNTIwNDYyOTI1OTQ0.XuUj1w.tXE4_LnWrz669sfmYa78MdIJaTA");
+var bot = JSON.parse(fs.readFileSync("shark.json"));
+
+client.once("ready", () => {
+  console.log(`${bot.name} is online!`);
+});
+
+client.on("message", (message) => {
+  if (!message.content.startsWith(bot.prefix)) return; // "message.author.bot" working on it
+});
+
+client.login(bot.token);
