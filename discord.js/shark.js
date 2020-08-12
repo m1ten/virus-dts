@@ -6,7 +6,7 @@ const Discord = require("discord.js"),
     output: process.stdout,
   });
 
-readline.question("Enter Name: ", name => {
+readline.question("Enter Name: ", (name) => {
   console.log(name);
   readline.close();
 });

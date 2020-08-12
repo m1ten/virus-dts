@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m1ten/discord-bot.git"
+    "url": "git+https://github.com/m1ten/sharkdev.git"
   },
   "author": "m1ten",
-  "license": "GPL-3.0 ~/Info/LICENSE",
+  "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/m1ten/discord-bot/issues"
+    "url": "https://github.com/m1ten/sharkdev/issues"
   },
-  "homepage": "https://github.com/m1ten/discord-bot#readme"
+  "homepage": "https://github.com/m1ten/sharkdev#readme"
 }
