@@ -5,7 +5,7 @@ from discord.ext import commands
 
 # variables
 client = {
-    "name": "shark",
+    "name": None,
     "token": None,
     "owner_id": None
 }
@@ -26,6 +26,10 @@ def _client_():
 
     # open client.json with write permission
     write_client = open('./data/client.json', 'w')
+
+    # if there is no name, input name
+    if client['name'] is None:
+        client['name'] = input('Enter Bot Name: ')
 
     # if there is no token, input token
     if client['token'] is None:
