@@ -1,10 +1,11 @@
 ## Sharkdev
 
-[Discord bot](https://github.com/m1ten/sharkdev) written in [python](https://www.python.org/) ([Discord.py](https://github.com/Rapptz/discord.py)).
+[Discord bot](https://github.com/m1ten/sharkdev) by miten, written in [python](https://www.python.org/) ([Discord.py](https://github.com/Rapptz/discord.py)).
 
 ### TODO
 ```
-[x]: working bot?
-[ ]: Add custom status support
+[x]: Working bot?
+[x]: Custom status support
+[ ]: Custom prefix support
 [ ]: Update commands
 ```
