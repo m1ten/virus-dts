@@ -3,13 +3,15 @@ import discord
 import os
 import json
 
+# NOTE TO SELF: COMMENTS PLEASE!
+
 # predetermined functions
 def clear():
     if os.name == "nt": 
         _ = os.system("cls") 
     else: 
         _ = os.system("clear")
-def file(path_to_file, permission='r', data=None, indent=4):
+def file(path_to_file, permission='r', data="ALL PREVIOUS DATA WILL BE ERASED", indent=4):
 
     if permission == 'r':
         return json.load(open(path_to_file, 'r'))
