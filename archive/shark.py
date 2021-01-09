@@ -11,6 +11,7 @@ def clear():
         _ = os.system("cls") 
     else: 
         _ = os.system("clear")
+        
 def file(path_to_file, permission='r', data="ALL PREVIOUS DATA WILL BE ERASED", indent=4):
 
     if permission == 'r':
