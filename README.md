@@ -4,4 +4,4 @@ world discord bot
   
 ## License
 
-[zlib](LICENSE.txt)
+[zlib](LICENSE)
