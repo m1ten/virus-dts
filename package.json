@@ -2,9 +2,10 @@
   "name": "atlas",
   "version": "1.0.0",
   "description": "world discord bot",
-  "main": "src/index.ts",
+  "main": "src/atlas.ts",
   "scripts": {
-    "run": "ts-node src/index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "atlas": "nodemon src/atlas.ts"
   },
   "repository": {
     "type": "git",
@@ -20,9 +21,15 @@
   },
   "homepage": "https://github.com/m1ten/atlas#readme",
   "dependencies": {
+    "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
   }
 }
