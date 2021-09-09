@@ -21,7 +21,7 @@ const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
-    console.log("Started refreshing application (/) commands.");
+    console.log("Started refreshing application slash commands.");
 
     await rest.put(
       // Routes.applicationCommand(process.env.CLIENTID)
@@ -32,7 +32,7 @@ const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
       { body: commands }
     );
 
-    console.log("Successfully reloaded application (/) commands.");
+    console.log("Successfully reloaded application slash commands.");
   } catch (error) {
     console.error(error);
   }
