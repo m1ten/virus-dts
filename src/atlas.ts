@@ -3,6 +3,9 @@ import { readdirSync } from "fs";
 import { config } from "dotenv";
 config();
 
+// import { deploy } from "./deploy";
+// deploy();
+
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
   presence: {

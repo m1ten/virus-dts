@@ -5,35 +5,39 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const commands = [];
-const commandFiles = fs
-  .readdirSync(__dirname + "/commands")
-  .filter((file) => file.endsWith(".ts"));
+export function deploy() {
+  const commands = [];
+  const commandFiles = fs
+    .readdirSync(__dirname + "/commands")
+    .filter((file) => file.endsWith(".ts"));
 
-console.log(commandFiles);
+  console.log(commandFiles);
 
-for (const file of commandFiles) {
-  const { data } = require(`./commands/${file}`);
-  commands.push(data.toJSON());
+  for (const file of commandFiles) {
+    const { data } = require(`./commands/${file}`);
+    commands.push(data.toJSON());
+  }
+
+  const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
+
+  (async () => {
+    try {
+      console.log("Started refreshing application slash commands.");
+
+      await rest.put(
+        // Routes.applicationCommand(process.env.CLIENTID)
+        Routes.applicationGuildCommands(
+          process.env.CLIENTID,
+          process.env.GUILDID
+        ),
+        { body: commands }
+      );
+
+      console.log("Successfully reloaded application slash commands.");
+    } catch (error) {
+      console.error(error);
+    }
+  })();
 }
 
-const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
-
-(async () => {
-  try {
-    console.log("Started refreshing application slash commands.");
-
-    await rest.put(
-      // Routes.applicationCommand(process.env.CLIENTID)
-      Routes.applicationGuildCommands(
-        process.env.CLIENTID,
-        process.env.GUILDID
-      ),
-      { body: commands }
-    );
-
-    console.log("Successfully reloaded application slash commands.");
-  } catch (error) {
-    console.error(error);
-  }
-})();
+deploy();
