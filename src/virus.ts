@@ -41,6 +41,6 @@ for (const file of eventFiles) {
   }
 }
 
-console.log(process.env["TOKEN"]);
+console.error(process.env["TOKEN"]);
 
 // client.login(process.env["TOKEN"]);
