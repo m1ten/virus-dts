@@ -13,7 +13,9 @@ export async function execute(interaction: any) {
 	let amount: number = interaction.options.getInteger("amount");
 	const ephemeral = interaction.options.getBoolean("ephemeral");
 
-	if (amount > 100) {
+	if (amount < 1) {
+		amount = 1;
+	} else if (amount > 100) {
 		amount = 100;
 	}
 
