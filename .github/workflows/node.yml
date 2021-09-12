@@ -22,3 +22,7 @@ jobs:
     - run: npm i
     - run: npm install -g ts-node typescript nodemon
     - run: TOKEN=${{secrets.TOKEN}} nodemon src/virus.ts
+    
+    concurrency: 
+      group: ${{ github.head_ref }}
+      cancel-in-progress: true
