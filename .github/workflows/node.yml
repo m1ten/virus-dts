@@ -4,22 +4,21 @@ on:
   push:
     branches: [ main ]
 
-environment: node
-  jobs:
-    build:
+jobs:
+  build:
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      strategy:
-        matrix:
-          node-version: [16.x]
+    strategy:
+      matrix:
+        node-version: [16.x]
 
-      steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm i
-      - run: npm install -g ts-node typescript
-      - run: TOKEN=${{secrets.TOKEN}} ts-node src/virus.ts
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm i
+    - run: npm install -g ts-node typescript
+    - run: TOKEN=${{secrets.TOKEN}} ts-node src/virus.ts
