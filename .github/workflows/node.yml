@@ -20,5 +20,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm i
-    - run: npm install -g ts-node typescript
+    - run: npm install -g ts-node typescript nodemon
     - run: TOKEN=${{secrets.TOKEN}} nodemon src/virus.ts
