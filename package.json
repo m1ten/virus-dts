@@ -1,15 +1,15 @@
 {
-  "name": "atlas",
+  "name": "virus",
   "version": "1.0.0",
-  "description": "world discord bot",
-  "main": "src/atlas.ts",
+  "description": "multi-purpose discord bot",
+  "main": "src/virus.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "atlas": "nodemon src/atlas.ts"
+    "virus": "nodemon src/virus.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m1ten/atlas.git"
+    "url": "git+https://github.com/m1ten/virus-dts.git"
   },
   "keywords": [
     "discord"
@@ -17,9 +17,9 @@
   "author": "miten",
   "license": "Zlib",
   "bugs": {
-    "url": "https://github.com/m1ten/atlas/issues"
+    "url": "https://github.com/m1ten/virus-dts/issues"
   },
-  "homepage": "https://github.com/m1ten/atlas#readme",
+  "homepage": "https://github.com/m1ten/virus-dts#readme",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "@types/node": "^16.9.1",
+    "node": "^16.6.1",
+    "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   }
