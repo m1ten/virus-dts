@@ -20,4 +20,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm i
-    - run: nodemon src/virus.ts
+    - run: npx nodemon src/virus.ts
