@@ -20,4 +20,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm i
-    - run: TOKEN=${{ secrets.TOKEN }} npx ts-node src/virus.ts
+    - run: TOKEN=${{secrets.TOKEN}} ts-node src/virus.ts
