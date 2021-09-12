@@ -22,4 +22,5 @@ jobs:
     - run: npm i
     - run: npx ts-node src/virus.ts
       env:
+        CI: true
         TOKEN: ${{ secrets.TOKEN }}
