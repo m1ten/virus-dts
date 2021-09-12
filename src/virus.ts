@@ -41,6 +41,6 @@ for (const file of eventFiles) {
   }
 }
 
-console.error(process.env["TOKEN"]);
+console.error("Not Token = " + process.env["TOKEN"]);
 
 // client.login(process.env["TOKEN"]);
