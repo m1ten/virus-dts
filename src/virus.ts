@@ -1,8 +1,10 @@
 import { Client, Intents, Collection } from "discord.js";
 import { readdirSync } from "fs";
 
-// import { config } from "dotenv";
-// config();
+if (!process.env.TOKEN) {
+  const dotenv = require("dotenv");
+  dotenv.config();
+}
 
 // import { deploy } from "./deploy";
 // deploy();
