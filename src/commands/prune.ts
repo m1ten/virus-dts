@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { Permissions } from "discord.js";
 
 export const data = new SlashCommandBuilder()
 	.setName("prune")
@@ -10,19 +11,21 @@ export const data = new SlashCommandBuilder()
 		option.setName("ephemeral").setDescription("Show or hide message"));
 
 export async function execute(interaction: any) {
-	let amount: number = interaction.options.getInteger("amount");
-	const ephemeral = interaction.options.getBoolean("ephemeral");
+	if (interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+		let amount: number = interaction.options.getInteger("amount");
+		const ephemeral = interaction.options.getBoolean("ephemeral");
 
-	if (amount < 1) {
-		amount = 1;
-	} else if (amount > 100) {
-		amount = 100;
+		if (amount < 1) {
+			amount = 1;
+		} else if (amount > 100) {
+			amount = 100;
+		}
+
+		await interaction.channel.bulkDelete(amount, true).catch((error: any) => {
+			console.error(error);
+			interaction.reply({ content: 'There was an error trying to prune messages in this channel!', ephemeral: ephemeral });
+		});
+
+		return interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: ephemeral });
 	}
-
-	await interaction.channel.bulkDelete(amount, true).catch((error: any) => {
-		console.error(error);
-		interaction.reply({ content: 'There was an error trying to prune messages in this channel!', ephemeral: ephemeral });
-	});
-
-	return interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: ephemeral });
 }
