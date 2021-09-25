@@ -17,10 +17,21 @@ export async function execute(
   try {
     await command.execute(interaction);
   } catch (error) {
+
+    //@ts-ignore
+    if (error.code == 50013) {
+      return interaction.reply({
+        content:
+          ":exclamation: I don't have permission to execute this command!",
+        ephemeral: true,
+      });
+    }
+
     console.error(error);
+
     await interaction.reply({
       content:
-        ":exclamation: | There was an error while executing this command!",
+        ":exclamation: There was an error while executing this command!",
       ephemeral: true,
     });
   }

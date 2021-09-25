@@ -21,10 +21,7 @@ export async function execute(interaction: any) {
 			amount = 100;
 		}
 
-		await interaction.channel.bulkDelete(amount, true).catch((error: any) => {
-			console.error(error);
-			interaction.reply({ content: 'There was an error trying to prune messages in this channel!', ephemeral: ephemeral });
-		});
+		await interaction.channel.bulkDelete(amount, true);
 
 		return interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: ephemeral });
 	}
